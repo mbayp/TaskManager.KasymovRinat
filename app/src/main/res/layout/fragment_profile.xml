@@ -12,17 +12,31 @@
         android:layout_gravity="center"
         android:src="@drawable/album2"
         android:scaleType="centerCrop"
-        android:id="@+id/profileImageView" />
-
+        android:id="@+id/profileImageView"
+        android:clickable="true"
+        android:contentDescription="Profile Image"
+        android:focusable="true" />
 
 
     <EditText
+        android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Введите текст"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center"
+        android:layout_marginTop="84dp"
+        android:padding="8dp"
+        android:minHeight="48dp"
         android:gravity="center"
-        android:id="@+id/editText" />
+        android:hint="Name"
+        />
 
+    <Button
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_gravity="center"
+        android:layout_marginTop="144dp"
+        android:id="@+id/button"
+        />
 </FrameLayout>
