@@ -15,7 +15,8 @@
         android:id="@+id/profileImageView"
         android:clickable="true"
         android:contentDescription="Profile Image"
-        android:focusable="true" />
+        android:focusable="true"
+        android:onClick="onProfileImageClick"/>
 
 
     <EditText
