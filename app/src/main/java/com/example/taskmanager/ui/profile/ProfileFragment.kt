@@ -12,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import androidx.navigation.fragment.findNavController
 import com.example.taskmanager.R
 import com.example.taskmanager.databinding.FragmentNotificationsBinding
 import com.example.taskmanager.databinding.FragmentProfileBinding
@@ -21,13 +23,13 @@ import com.example.taskmanager.databinding.FragmentProfileBinding
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var editText: EditText
     private lateinit var profileImageView: de.hdodenhof.circleimageview.CircleImageView
     private val preferences by lazy {
         requireActivity().getPreferences(Context.MODE_PRIVATE)
     }
-
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +57,7 @@ class ProfileFragment : Fragment() {
         }
 
         profileImageView.setOnClickListener {
-            onProfileImageClick(it)
+            findNavController().navigate(R.id.phoneFragment)
         }
 
         return binding.root
@@ -68,10 +70,6 @@ class ProfileFragment : Fragment() {
 
     private var profileImageUri: Uri? = null
 
-    fun onProfileImageClick(view: View) {
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -91,6 +89,10 @@ class ProfileFragment : Fragment() {
         editor.apply()
     }
 
+    fun onProfileImageClick(view: View) {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
+    }
     companion object {
         private const val GALLERY_REQUEST_CODE = 1001
         private const val NAME_KEY = "nameKey"
