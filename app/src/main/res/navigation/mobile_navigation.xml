@@ -51,7 +51,5 @@
         android:name="com.example.taskmanager.ui.auth.verify.VerifyFragment"
         android:label="fragment_verify"
         tools:layout="@layout/fragment_verify" />
-    <action
-        android:id="@+id/action_profileFragment_to_phoneFragment"
-        app:destination="@id/phoneFragment" />
+
 </navigation >

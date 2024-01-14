@@ -17,7 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.taskmanager.R
 import com.example.taskmanager.databinding.FragmentNotificationsBinding
 import com.example.taskmanager.databinding.FragmentProfileBinding
-
+import com.google.firebase.auth.FirebaseAuth
 
 
 class ProfileFragment : Fragment() {
@@ -30,6 +30,7 @@ class ProfileFragment : Fragment() {
     private val preferences by lazy {
         requireActivity().getPreferences(Context.MODE_PRIVATE)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,17 +56,17 @@ class ProfileFragment : Fragment() {
         saveButton.setOnClickListener {
             saveNameAndImage(editText.text.toString(), profileImageUri)
         }
-
-        profileImageView.setOnClickListener {
+            binding.exit.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
             findNavController().navigate(R.id.phoneFragment)
         }
 
         return binding.root
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
     }
 
     private var profileImageUri: Uri? = null
@@ -89,10 +90,7 @@ class ProfileFragment : Fragment() {
         editor.apply()
     }
 
-    fun onProfileImageClick(view: View) {
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
-    }
+
     companion object {
         private const val GALLERY_REQUEST_CODE = 1001
         private const val NAME_KEY = "nameKey"
